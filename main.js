@@ -4,7 +4,13 @@ const url = require('url')
 let win
 
 function createWindow() {
-  win = new BrowserWindow({ width: 1024, height: 768 })
+  const options = {
+    width: 1024,
+    height: 768,
+    show: false
+  };
+
+  win = new BrowserWindow(options)
 
   win.loadURL(url.format({
     pathname: 'translate.google.com',
@@ -12,7 +18,9 @@ function createWindow() {
     slashes: true
   }))
 
-  // win.webContents.openDevTools()
+  win.once('ready-to-show', () => {
+    win.show()
+  })
 
   win.on('closed', () => {
     win = null
