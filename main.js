@@ -1,9 +1,14 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, shell, Menu } = require('electron')
 const url = require('url')
+const createDefaultMenuOptions = require('electron-default-menu')
 
 let win
 
 function createWindow() {
+  const menuOptions = createDefaultMenuOptions(app, shell)
+  const menu = Menu.buildFromTemplate(menuOptions)
+  Menu.setApplicationMenu(menu)
+
   const options = {
     width: 1024,
     height: 768,
